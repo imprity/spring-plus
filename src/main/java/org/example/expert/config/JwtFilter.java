@@ -20,7 +20,6 @@ import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
 public class JwtFilter implements Filter {
 
     private final JwtUtil jwtUtil;

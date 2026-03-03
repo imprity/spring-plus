@@ -12,8 +12,7 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-
-    private final JwtFilter jwtFilter;
+    private final JwtUtil jwtUtil;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -24,7 +23,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 // UsernamePasswordAuthenticationFilter, DefaultLoginPageGeneratingFilter 비활성화
                 .formLogin(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtFilter, SecurityContextHolderAwareRequestFilter.class)
+                .addFilterBefore(new JwtFilter(jwtUtil), SecurityContextHolderAwareRequestFilter.class)
                 .authorizeHttpRequests(
                         auth ->
                                 auth
